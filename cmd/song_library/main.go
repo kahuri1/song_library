@@ -6,6 +6,7 @@ import (
 	"github.com/kahuri1/song_library/pkg/model"
 	"github.com/kahuri1/song_library/pkg/repository"
 	"github.com/kahuri1/song_library/pkg/service"
+	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )

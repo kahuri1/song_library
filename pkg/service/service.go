@@ -1,10 +1,15 @@
 package service
 
 import (
+	"github.com/kahuri1/song_library/pkg/model"
 	log "github.com/sirupsen/logrus"
 )
 
 type repo interface {
+	CheckGroup(group *model.Group) (int64, error)
+	CreateGroup(group *model.Group) error
+	CheckSong(song *model.Song) (int64, error)
+	CreateSongAndDetails(song *model.Song) error
 }
 
 type Service struct {
