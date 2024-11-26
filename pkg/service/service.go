@@ -10,6 +10,8 @@ type repo interface {
 	CreateGroup(group *model.Group) error
 	CheckSong(song *model.Song) (int64, error)
 	CreateSongAndDetails(song *model.Song) error
+	UpdateGroup(queryGroup string, paramGroup []interface{}, input *model.Input) (*model.Input, error)
+	UpdateSong(query string, args []interface{}, input *model.Input) (*model.Input, error)
 }
 
 type Service struct {
