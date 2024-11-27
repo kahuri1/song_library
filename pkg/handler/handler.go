@@ -31,6 +31,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	r.POST("/song", h.CreateSongAndDetails)
 	r.DELETE("/group", h.DeleteGroup)
 	r.DELETE("/song", h.DeleteSong)
+	r.POST("/songs", h.NewSong)
 	return r
 }
 

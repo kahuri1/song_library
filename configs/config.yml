@@ -7,3 +7,5 @@ db:
   dbname:   "song_libraries"
   sslmode:  "disable"
   password: "mypassword"
+
+externalUrl: "http://localhost:8081/info"

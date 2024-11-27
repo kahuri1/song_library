@@ -27,3 +27,14 @@ type Input struct {
 	Group Group `json:"group"`
 	Song  Song  `json:"song"`
 }
+
+type AddedSong struct {
+	Group string `json:"group"`
+	Song  string `json:"song"`
+}
+
+type SongsDetail struct {
+	Text        string `json:"text"`
+	ReleaseDate string `json:"releaseDate"`
+	Link        string `json:"link"`
+}
