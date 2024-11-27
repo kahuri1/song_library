@@ -12,6 +12,10 @@ type repo interface {
 	CreateSongAndDetails(song *model.Song) error
 	UpdateGroup(queryGroup string, paramGroup []interface{}, input *model.Input) (*model.Input, error)
 	UpdateSong(query string, args []interface{}, input *model.Input) (*model.Input, error)
+	DeleteGroupByID(group *model.Group) error
+	DeleteGroupByName(group *model.Group) error
+	DeleteSongByID(song *model.Song) error
+	DeleteSongByName(song *model.Song) error
 }
 
 type Service struct {

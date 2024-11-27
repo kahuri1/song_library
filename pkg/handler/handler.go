@@ -11,6 +11,8 @@ type songLibsService interface {
 	CreateSongAndDetails(song *model.Song) error
 	CreateGroupAndSong(input *model.Input) error
 	ChangeData(input *model.Input) (*model.Input, error)
+	DeleteGroup(group *model.Group) error
+	DeleteSong(song *model.Song) error
 }
 
 type Handler struct {
@@ -27,6 +29,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	r.POST("/group/song", h.CreateGroupAndSong)
 	r.PUT("/group/song", h.ChangeData)
 	r.POST("/song", h.CreateSongAndDetails)
+	r.DELETE("/group", h.DeleteGroup)
+	r.DELETE("/song", h.DeleteSong)
 	return r
 }
 
