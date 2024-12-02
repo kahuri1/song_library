@@ -32,15 +32,15 @@ func Newhandler(service songLibsService) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	r := gin.Default()
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.POST("/group", h.CreateGroup)
-	r.POST("/group/song", h.CreateGroupAndSong)
-	r.PUT("/group/song", h.ChangeData)
-	r.POST("/song", h.CreateSongAndDetails)
-	r.GET("/song/text", h.SongLine)
+	r.POST("/group", h.CreateGroup)             //
+	r.POST("/group/song", h.CreateGroupAndSong) //
+	r.PUT("/group/song", h.ChangeData)          //
+	r.POST("/song", h.CreateSongAndDetails)     //
+	r.POST("/song/text", h.SongLine)            //
 	r.DELETE("/group", h.DeleteGroup)
 	r.DELETE("/song", h.DeleteSong)
-	r.POST("/songs", h.NewSong)
-	r.POST("/library", h.Library)
+	r.POST("/songs", h.NewSong)   //
+	r.POST("/library", h.Library) //
 	return r
 }
 
