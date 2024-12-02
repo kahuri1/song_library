@@ -67,6 +67,3 @@ http://localhost:8000/swagger/index.html#/
 swag init -g cmd/song_library/main.go
 
 
-## Структура проекта
-
-Для получения информации о структуре проекта вы можете ознакомиться с репозиторием:  
