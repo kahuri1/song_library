@@ -11,6 +11,17 @@ import (
 	"net/url"
 )
 
+// @Summary Add New Song
+// @Tags Library
+// @Description This endpoint allows you to add a new song by retrieving its details from an external API based on the provided group and song name.
+// @ID add-new-song
+// @Accept json
+// @Produce json
+// @Param input body model.AddedSong true "Input data for adding a new song"
+// @Success 200 {object} model.Response "Success message indicating the song was created"
+// @Failure 400 {object} model.Error "Invalid input data or errors communicating with external API"
+// @Failure 500 {object} model.Error "Internal server error"
+// @Router /songs [post]
 func (h *Handler) NewSong(c *gin.Context) {
 	var song model.AddedSong
 	var input model.Input
@@ -19,7 +30,7 @@ func (h *Handler) NewSong(c *gin.Context) {
 	d, err := c.GetRawData()
 	err = json.Unmarshal(d, &song)
 	if err != nil {
-		handlerError(c, err, "ошибка считывания json", http.StatusBadRequest)
+		handlerError(c, err, "error read json", http.StatusBadRequest)
 		return
 	}
 	externalUrl := viper.GetString("externalUrl")
@@ -44,12 +55,12 @@ func (h *Handler) NewSong(c *gin.Context) {
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		handlerError(c, err, "ошибка обработки ответа", http.StatusBadRequest)
+		handlerError(c, err, "error read json", http.StatusBadRequest)
 		return
 	}
 
 	if err = json.Unmarshal(body, &songDetail); err != nil {
-		handlerError(c, err, "ошибка считывания json", http.StatusBadRequest)
+		handlerError(c, err, "Error processing request", http.StatusBadRequest)
 		return
 	}
 	input.Song.Link = songDetail.Link
@@ -58,9 +69,9 @@ func (h *Handler) NewSong(c *gin.Context) {
 
 	err = h.service.CreateGroupAndSong(&input)
 	if err != nil {
-		handlerError(c, err, "ошибка обработки запроса", http.StatusBadRequest)
+		handlerError(c, err, "Error processing request", http.StatusBadRequest)
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "group and song created"})
 
+	sendResponse(c, http.StatusCreated, "group and song created", nil)
 }

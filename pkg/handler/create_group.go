@@ -7,6 +7,18 @@ import (
 	"net/http"
 )
 
+// @Summary Create group
+// @Tags Group
+// @Description create group
+// @ID create-group
+// @Accept json
+// @Produce json
+// @Param input body model.Input true "Input data for updating song"
+// @Success 200 {object} model.Response "The group was successfully created"
+// @Failure 400 {object} model.Error "Invalid input data"
+// @Failure 404 {object} model.Error "Song not found"
+// @Failure 500 {object} model.Error "Internal server error"
+// @Router /group [post]
 func (h *Handler) CreateGroup(c *gin.Context) {
 	var group model.Group
 
@@ -14,14 +26,14 @@ func (h *Handler) CreateGroup(c *gin.Context) {
 
 	err = json.Unmarshal(d, &group)
 	if err != nil {
-		handlerError(c, err, "ошибка считывания json", http.StatusBadRequest)
+		handlerError(c, err, "error read json", http.StatusBadRequest)
 		return
 	}
 
 	err = h.service.CreateGroup(&group)
 	if err != nil {
-		handlerError(c, err, "ошибка обработки запроса", http.StatusBadRequest)
+		handlerError(c, err, "Error processing request", http.StatusBadRequest)
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "group created"})
+	sendResponse(c, http.StatusOK, "group created", nil)
 }

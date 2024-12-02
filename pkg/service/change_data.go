@@ -11,14 +11,13 @@ func (s *Service) ChangeData(input *model.Input) (*model.Input, error) {
 	querySong, paramSong := createRequestTableSong(input)
 
 	quest1, err := s.repo.UpdateGroup(queryGroup, paramGroup, input)
-	if err != nil {
+	if err != nil && quest1 != nil {
 		return nil, err
 	}
 	quest2, err := s.repo.UpdateSong(querySong, paramSong, input)
-	if err != nil {
+	if err != nil && quest2 != nil {
 		return nil, err
 	}
-	fmt.Println(quest1, quest2)
 	return input, nil
 }
 

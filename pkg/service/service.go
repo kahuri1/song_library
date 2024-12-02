@@ -16,6 +16,8 @@ type repo interface {
 	DeleteGroupByName(group *model.Group) error
 	DeleteSongByID(song *model.Song) error
 	DeleteSongByName(song *model.Song) error
+	Library(query string) (*model.Library, error)
+	SongText(songID int64) (string, error)
 }
 
 type Service struct {

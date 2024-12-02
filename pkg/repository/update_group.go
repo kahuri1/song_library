@@ -31,14 +31,14 @@ func (r *Repository) GetGroup(input *model.Input) (*model.Input, error) {
 		PlaceholderFormat(sq.Dollar).
 		ToSql()
 	if err != nil {
-		return nil, err // Возвращаем ошибку, если не удалось создать SQL-запрос
+		return nil, err
 	}
 	err = r.db.QueryRow(checkSql, checkArgs...).Scan(&input.Group.Name)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, nil // Возвращаем nil, если группы не найдены
+			return nil, nil
 		}
-		return nil, err // Возвращаем ошибку, если что-то пошло не так при выполнении запроса
+		return nil, err
 	}
 	return input, nil
 }
